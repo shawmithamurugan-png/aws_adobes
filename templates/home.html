@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Home | Blissful Abodes{% endblock %}
+
+{% block content %}
+
+<!-- HERO WITH OVERLAY -->
+<section class="hero-modern">
+    <div class="hero-content">
+        <h1>Book Better. Stay Happier.</h1>
+        <p>Luxury hotels, trusted stays, unforgettable experiences.</p>
+    </div>
+
+    <!-- FLOATING SEARCH CARD -->
+    <div class="search-card">
+        <input type="text" placeholder="Enter city or hotel name">
+        <input type="date">
+        <input type="date">
+        <select>
+            <option>2 Adults</option>
+            <option>4 Adults</option>
+            <option>6 Adults</option>
+        </select>
+        <button class="btn-primary">Search Hotels</button>
+    </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-us">
+    <h2>Why Blissful Abodes?</h2>
+    <div class="why-grid">
+        <div class="why-card">🏨 Handpicked Hotels</div>
+        <div class="why-card">💳 Secure Payments</div>
+        <div class="why-card">📞 24/7 Support</div>
+        <div class="why-card">⭐ Trusted Reviews</div>
+    </div>
+</section>
+
+<!-- HOTEL LIST (NEW CARD STYLE) -->
+<section class="hotel-showcase">
+    <h2>Top Rated Stays</h2>
+
+    {% if hotels %}
+    <div class="hotel-showcase-grid">
+        {% for hotel in hotels %}
+        <div class="hotel-vertical-card">
+            <img src="{{ url_for('static', filename=hotel.image) }}" alt="{{ hotel.name }}">
+
+            <div class="hotel-body">
+                <h3>{{ hotel.name }}</h3>
+                <p class="location">{{ hotel.location }}</p>
+
+                <div class="hotel-meta">
+                   <span class="rating">⭐ {{ hotel.rating }}</span>
+
+                    <span>₹ {{ hotel.price }}/night</span>
+                </div>
+
+                <button class="btn btn-primary">Book Now</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="text-align:center;">No hotels available.</p>
+    {% endif %}
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta">
+    <h2>Ready for your next trip?</h2>
+    <p>Create an account and unlock exclusive deals.</p>
+    <a href="{{ url_for('signup') }}" class="btn btn-secondary">Get Started</a>
+</section>
+
+{% endblock %}
